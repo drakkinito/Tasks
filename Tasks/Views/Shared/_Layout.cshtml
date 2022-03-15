@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+
+    <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
+        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>
+    <header>
+        <div class="container bg-dark">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <a href="/" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0">
+                    <img class="bi me-2" width="60" height="58" src="~/img/logo.png" />
+                </a>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    <button type="button" class="btn btn-warning">Sign-up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container-fluid pb-3">
+        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+            <div class="bg-light border rounded-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Calendar" class="nav-link">Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="History" class="nav-link">History</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-light border rounded-3">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-3 bg-dark text-white">
+        <div class="container">
+            <p>© @await Component.InvokeAsync("Year") Company, Tasks. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+            </ul>
+        </div>
+
+    </footer>
+</body>
+</html>
