@@ -13,43 +13,42 @@
 <body>
     <header>
         <div class="container bg-dark">
-            <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <div class="d-flex flex-wrap align-items-center justify-content-around">
                 <a href="/" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0">
-                    <img class="bi me-2" width="60" height="58" src="~/img/logo.png" />
+                    <img class="bi me-2" width="63" height="64" src="~/img/tasks.png" />
                 </a>
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <form class="col-12 col-lg-4 mb-3 mb-lg-0">
                     <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                 </form>
-                <div class="text-end">
+                <div class="text-end me-2">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
                     <button type="button" class="btn btn-warning">Sign-up</button>
                 </div>
             </div>
         </div>
     </header>
-    <main class="container-fluid pb-3">
+    <main class="container-xl pb-3">
         <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-            <div class="bg-light border rounded-3">
+            <div class="bg-light border rounded-3 mt-3 w-75 p-2" style="height: 140px">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link">Tasks</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary">Tasks</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Calendar" class="nav-link">Calendar</a>
+                        <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary">Calendar</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="History" class="nav-link">History</a>
+                        <a asp-controller="Home" asp-action="History" class="nav-link link-secondary">History</a>
                     </li>
                 </ul>
             </div>
             <div class="bg-light border rounded-3">
                 @RenderBody()
             </div>
-        </div>
+        </div>  
     </main>
-
-    <footer class="p-3 bg-dark text-white">
-        <div class="container">
+    <footer class="text-white fixed-bottom">
+        <div class="container bg-dark">
             <p>© @await Component.InvokeAsync("Year") Company, Tasks. All rights reserved.</p>
             <ul class="list-unstyled d-flex">
                 <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
@@ -57,7 +56,6 @@
                 <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
             </ul>
         </div>
-
     </footer>
 </body>
 </html>
