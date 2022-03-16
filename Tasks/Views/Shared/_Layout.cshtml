@@ -9,7 +9,7 @@
         <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="~/css/style.css" rel="stylesheet">
     </asp:ContentPlaceHolder>
-
+    <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <header>
@@ -33,7 +33,7 @@
             <div class="col-sm-3 p-2">
                 <ul class="nav flex-column nav-pills nav-tabs">
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary @(@ViewData["IndexActive"])">Tasks</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary @ViewData["IndexActive"]">Tasks</a>
                     </li>
                     <li class="nav-item">
                         <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary @(@ViewData["CalendarActive"])">Calendar</a>
@@ -43,6 +43,40 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="container mt-3">
+                <h3>Modal Example</h3>
+                <p>Click on the button to open the modal.</p>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                    Open modal
+                </button>
+            </div>
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modal Heading</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            Modal body..
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <div class="row col-sm-8 w-75 ms-sm-2 mb-sm-5">
                 @RenderBody()
             </div>
