@@ -42,44 +42,17 @@
                         <a asp-controller="Home" asp-action="History" class="nav-link link-secondary @(@ViewData["HistoryActive"])">History</a>
                     </li>
                 </ul>
-            </div>
-
-            <div class="container mt-3">
-                <h3>Modal Example</h3>
-                <p>Click on the button to open the modal.</p>
-
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                    Open modal
-                </button>
-            </div>
-
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Modal Heading</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            Modal body..
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        </div>
-
-                    </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#ModalTask">
+                        New task
+                    </button>
                 </div>
             </div>
-
             <div class="row col-sm-8 w-75 ms-sm-2 mb-sm-5">
                 @RenderBody()
             </div>
+
+            @* add  last action for tasks *@
         </div>
     </main>
     <footer class="text-white fixed-bottom m-0">
@@ -92,5 +65,31 @@
             </ul>
         </div>
     </footer>
+
+    @*add partialview*@
+    <div class="modal" id="ModalTask">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form asp-action="/" method="post">
+                    <div class="modal-header">
+                        <h5 class="card-title">New task</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <div class="form-floating">
+                            <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Describe your task</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
