@@ -7,6 +7,7 @@
 
     <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
         <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="~/css/style.css" rel="stylesheet">
     </asp:ContentPlaceHolder>
 
 </head>
@@ -14,46 +15,46 @@
     <header>
         <div class="container bg-dark">
             <div class="d-flex flex-wrap align-items-center justify-content-around">
-                <a href="/" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0">
+                <a href="/" class="d-flex align-items-center col-lg-4 mb-1 mb-lg-0 mt-1 mt-lg-0">
                     <img class="bi me-2" width="63" height="64" src="~/img/tasks.png" />
                 </a>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0">
                     <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
                 </form>
-                <div class="text-end me-2">
+                <div class="text-end mb-3 mb-lg-0">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
                     <button type="button" class="btn btn-warning">Sign-up</button>
                 </div>
             </div>
         </div>
     </header>
-    <main class="container-xl pb-3">
-        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-            <div class="bg-light border rounded-3 mt-3 w-75 p-2" style="height: 140px">
-                <ul class="nav flex-column">
+    <main class="container mb-sm-5">
+        <div class="row mt-3">
+            <div class="col-sm-3 p-2">
+                <ul class="nav flex-column nav-pills nav-tabs">
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary">Tasks</a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary @(@ViewData["IndexActive"])">Tasks</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary">Calendar</a>
+                        <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary @(@ViewData["CalendarActive"])">Calendar</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="Home" asp-action="History" class="nav-link link-secondary">History</a>
+                        <a asp-controller="Home" asp-action="History" class="nav-link link-secondary @(@ViewData["HistoryActive"])">History</a>
                     </li>
                 </ul>
             </div>
-            <div class="bg-light border rounded-3">
+            <div class="row col-sm-8 w-75 ms-sm-2 mb-sm-5">
                 @RenderBody()
             </div>
-        </div>  
+        </div>
     </main>
-    <footer class="text-white fixed-bottom">
-        <div class="container bg-dark">
+    <footer class="text-white fixed-bottom m-0">
+        <div class="container bg-dark d-flex justify-content-around pt-3">
             <p>© @await Component.InvokeAsync("Year") Company, Tasks. All rights reserved.</p>
             <ul class="list-unstyled d-flex">
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><img class="bi" width="24" height="24" src="~/img/twitter.png"></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><img class="bi" width="24" height="24" src="~/img/instagram.png"></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><img class="bi" width="24" height="24" src="~/img/facebook.png"></a></li>
             </ul>
         </div>
     </footer>
