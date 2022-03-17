@@ -1,10 +1,8 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"]</title>
-
     <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
         <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="~/css/style.css" rel="stylesheet">
@@ -48,11 +46,7 @@
                     </button>
                 </div>
             </div>
-            <div class="row col-sm-8 w-75 ms-sm-2 mb-sm-5">
-                @RenderBody()
-            </div>
-
-            @* add  last action for tasks *@
+            @RenderBody()
         </div>
     </main>
     <footer class="text-white fixed-bottom m-0">
@@ -65,31 +59,33 @@
             </ul>
         </div>
     </footer>
-
+    
     @*add partialview*@
-    <div class="modal" id="ModalTask">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <form asp-action="/" method="post">
-                    <div class="modal-header">
-                        <h5 class="card-title">New task</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    @*<div class="modal" id="ModalTask">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form asp-antiforgery="true" asp-action="Create" asp-controller="Home" method="post">
+                        <div class="validation" asp-validation-summary="ModelOnly"></div>
+                        <div class="modal-header">
+                            <h5 class="card-title">New task</h5>
                         </div>
-                        <div class="form-floating">
-                            <textarea class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
-                            <label for="floatingTextarea2">Describe your task</label>
+                        <div class="modal-body">
+                            <div class="input-group mb-3">
+                                <label asp-for="Title" for="colFormLabel" class="col-sm-2 col-form-label">Title</label>
+                                <input type="text" asp-for="Title" class="form-control" placeholder="Enter title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="form-floating">
+                                <textarea asp-for="Describe" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Describe your task</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Save</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div>
+        </div>*@
 </body>
 </html>
