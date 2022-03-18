@@ -3,6 +3,7 @@ using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Tasks.Controllers
 {
@@ -13,11 +14,12 @@ namespace Tasks.Controllers
         {
             _tasksService = tasksService;
         }
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var list = _tasksService.GetTasks().ToList();
+            IEnumerable<TaskModel> list = _tasksService.GetTasks(search).ToList();
+            ViewBag.Search = search;
 
-            return View(list.AsEnumerable());
+            return View(list);
         }
 
         public IActionResult Calendar()

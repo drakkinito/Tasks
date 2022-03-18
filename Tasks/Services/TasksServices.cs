@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Tasks.Context;
 using Tasks.Models;
 
@@ -12,17 +13,27 @@ namespace Tasks.Services
             _db = context;
         }
 
-        public IEnumerable<TaskModel> GetTasks()
+        public IEnumerable<TaskModel> GetTasks(string search)
         {
-            return _db.Tasks;
+            IQueryable<TaskModel> data = _db.Set<TaskModel>();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                return data.Where(t => t.Title.Contains(search) || t.Describe.Contains(search)).ToList();
+            }
+
+            return data.ToList();
         }
+
         public void AddTask(TaskModel task) {
             _db.Tasks.Add(task);
-            _db.SaveChangesAsync();
+            _db.SaveChanges();
         }
+
         public int UpdateTask(TaskModel task) {
             return 200;
         }
+
         public int DeleteTask(int id) {
             return 200;
         }

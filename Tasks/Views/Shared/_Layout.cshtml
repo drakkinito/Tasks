@@ -17,7 +17,7 @@
                     <img class="bi me-2" width="63" height="64" src="~/img/tasks.png" />
                 </a>
                 <form class="col-12 col-lg-4 mb-3 mb-lg-0">
-                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                    <input type="search" name="Search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" value="@ViewBag.Search">
                 </form>
                 <div class="text-end mb-3 mb-lg-0">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>
@@ -59,33 +59,14 @@
             </ul>
         </div>
     </footer>
-    
-    @*add partialview*@
-    @*<div class="modal" id="ModalTask">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <form asp-antiforgery="true" asp-action="Create" asp-controller="Home" method="post">
-                        <div class="validation" asp-validation-summary="ModelOnly"></div>
-                        <div class="modal-header">
-                            <h5 class="card-title">New task</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                                <label asp-for="Title" for="colFormLabel" class="col-sm-2 col-form-label">Title</label>
-                                <input type="text" asp-for="Title" class="form-control" placeholder="Enter title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                            </div>
-                            <div class="form-floating">
-                                <textarea asp-for="Describe" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
-                                <label for="floatingTextarea2">Describe your task</label>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
+
+    @{await Html.RenderPartialAsync("_AddTaskMW");}
+
+    <script>
+        function myFunction() {
+            var element = document.getElementById("myDIV");
+            element.classList.toggle("mystyle");
+        }
+    </script>
 </body>
 </html>
