@@ -63,9 +63,11 @@
     @{await Html.RenderPartialAsync("_AddTaskMW");}
 
     <script>
-        function myFunction() {
-            var element = document.getElementById("myDIV");
-            element.classList.toggle("mystyle");
+        function myFunction(id) {
+            var element = document.getElementById("handleBlock-" + id);
+            //element.classList.toggle("mystyle");
+
+            element.removeAttribute('readonly');
         }
     </script>
 </body>
