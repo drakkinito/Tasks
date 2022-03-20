@@ -8,6 +8,7 @@
         <link href="~/css/style.css" rel="stylesheet">
     </asp:ContentPlaceHolder>
     <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
     <header>
@@ -62,12 +63,19 @@
 
     @{await Html.RenderPartialAsync("_AddTaskMW");}
 
-    <script>
+    <script type="text/javascript">
         function myFunction(id) {
-            var element = document.getElementById("handleBlock-" + id);
+            var elem = document.querySelector('#handleCard');
+            //https://stackoverflow.com/questions/9200712/how-to-remove-data-attributes-using-html5-dataset
+            //var readonlyCard = document.getElementsByName("handleCards");
+            //var editCadr = document.getElementById("handleCard-" + id);
             //element.classList.toggle("mystyle");
+            //document.children.getElementsByClassName("handleCards").removeAttribute('readonly');
+            //readonlyCard.removeAttribute('readonly');
+            //readonlyCard.removeAttribute('readonly');
 
-            element.removeAttribute('readonly');
+            //editCadr.readOnly = false;
+
         }
     </script>
 </body>

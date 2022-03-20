@@ -17,8 +17,8 @@
             <div class="card">
                 <div class="card-body">
                     @*<h5 class="card-title">@task.Title</h5>*@
-                    <input readonly id="handleBlock-@task.Id" type="text" class="form-control" placeholder="Title" aria-label="Title" value="@task.Title">
-                    <textarea readonly class="form-control" aria-label="With textarea">@task.Describe</textarea>
+                    <input type="text" id="handleCard" data-previous="@task.Id" data-next="@task.Id" name="handleCards" class="form-control" placeholder="Title" aria-label="Title" value="@task.Title">
+                    <textarea id="handleCard" class="form-control handleCards" aria-label="With textarea handleCards">@task.Describe</textarea>
                     @*<p class="card-text">@task.Describe</p>*@
                 </div>
             </div>
