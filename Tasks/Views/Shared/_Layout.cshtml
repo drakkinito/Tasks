@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"]</title>
     <asp:ContentPlaceHolder ID="Stylesheets" runat="server">
-        <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="~/css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/css/style.css">
     </asp:ContentPlaceHolder>
     <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.js"></script>
@@ -64,18 +64,17 @@
     @{await Html.RenderPartialAsync("_AddTaskMW");}
 
     <script type="text/javascript">
-        function myFunction(id) {
-            var elem = document.querySelector('#handleCard');
-            //https://stackoverflow.com/questions/9200712/how-to-remove-data-attributes-using-html5-dataset
-            //var readonlyCard = document.getElementsByName("handleCards");
-            //var editCadr = document.getElementById("handleCard-" + id);
-            //element.classList.toggle("mystyle");
-            //document.children.getElementsByClassName("handleCards").removeAttribute('readonly');
-            //readonlyCard.removeAttribute('readonly');
-            //readonlyCard.removeAttribute('readonly');
+        function clearMW() {
+            document.getElementById("floatingInput").value = ""
+            document.getElementById("floatingTextarea2").value = ""
+        }
+        function setValueMW(id) {
 
-            //editCadr.readOnly = false;
+            var t = document.getElementById("t-" + id);
+            var d = document.getElementById("d-" + id);
 
+            document.getElementById("floatingInput").value = t.innerHTML;
+            document.getElementById("floatingTextarea2").value = d.innerHTML;
         }
     </script>
 </body>

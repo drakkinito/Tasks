@@ -1,9 +1,10 @@
 ﻿<div class="modal" id="ModalTask">
-    <div class="modal-dialog modal-">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form asp-antiforgery="true" asp-action="Create" asp-controller="Home" method="post">
                 <div class="modal-header">
                     <h5 class="card-title">New task</h5>
+                    <button type="button" onclick="clearMW()" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-floating mb-3">
@@ -16,8 +17,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Save</button>
+                    <button type="submit" class="btn btn-outline-success" data-bs-dismiss="modal">Save</button>
                 </div>
             </form>
         </div>
