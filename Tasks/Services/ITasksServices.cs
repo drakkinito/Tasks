@@ -6,8 +6,9 @@ namespace Tasks.Services
     public interface ITasksServices
     {
         public IEnumerable<TaskModel> GetTasks(string search);
-        public void AddTask(TaskModel task);
-        public int UpdateTask(TaskModel task);
-        public int DeleteTask(int id);
+        public TaskModel Get(int id);
+        public int Update(TaskModel task);
+        public void Add(TaskModel task);
+        public int Delete(int id);
     }
 }

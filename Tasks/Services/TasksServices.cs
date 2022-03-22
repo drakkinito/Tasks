@@ -25,16 +25,21 @@ namespace Tasks.Services
             return data.ToList();
         }
 
-        public void AddTask(TaskModel task) {
+        public TaskModel Get(int id)
+        {
+            return _db.Tasks.FirstOrDefault(t => t.Id == id);
+        }
+
+        public void Add(TaskModel task) {
             _db.Tasks.Add(task);
             _db.SaveChanges();
         }
 
-        public int UpdateTask(TaskModel task) {
+        public int Update(TaskModel task) {
             return 200;
         }
 
-        public int DeleteTask(int id) {
+        public int Delete(int id) {
             return 200;
         }
 

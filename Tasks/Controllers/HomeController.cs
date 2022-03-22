@@ -32,12 +32,20 @@ namespace Tasks.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Get(int id)
+        {
+            TaskModel task = _tasksService.Get(id);
+
+            return View(task);
+        }
+
         [HttpPost]
         public IActionResult Create(TaskModel task)
         {
             if (!string.IsNullOrEmpty(task.Title) || !string.IsNullOrEmpty(task.Describe))
             {
-                _tasksService.AddTask(task);
+                _tasksService.Add(task);
             }
 
             return RedirectToAction("Index");
