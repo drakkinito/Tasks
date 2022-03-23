@@ -7,3 +7,9 @@
     color: #6c757d;
     background-color: #d4d6d7;
 }
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 11.2em;
+}

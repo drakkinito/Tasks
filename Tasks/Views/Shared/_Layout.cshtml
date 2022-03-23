@@ -42,7 +42,7 @@
                     </li>
                 </ul>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#ModalTask">
+                    <button type="button" class="btn btn-outline-primary mt-3" onclick="clearMW()" data-bs-toggle="modal" data-bs-target="#ModalTask">
                         New task
                     </button>
                 </div>
@@ -69,9 +69,11 @@
             document.getElementById("floatingTextarea2").value = ""
         }
         function setValueMW(id) {
-
+            var formAction = document.getElementById("form");
             var t = document.getElementById("t-" + id);
             var d = document.getElementById("d-" + id);
+
+            formAction.setAttribute("action", "Home/Update/" + id);
 
             document.getElementById("floatingInput").value = t.innerHTML;
             document.getElementById("floatingTextarea2").value = d.innerHTML;

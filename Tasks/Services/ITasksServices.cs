@@ -7,8 +7,8 @@ namespace Tasks.Services
     {
         public IEnumerable<TaskModel> GetTasks(string search);
         public TaskModel Get(int id);
-        public int Update(TaskModel task);
+        public void Update(TaskModel task);
         public void Add(TaskModel task);
-        public int Delete(int id);
+        public void Delete(int id);
     }
 }

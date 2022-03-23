@@ -35,13 +35,19 @@ namespace Tasks.Services
             _db.SaveChanges();
         }
 
-        public int Update(TaskModel task) {
-            return 200;
+        public void Update(TaskModel task) {
+            var data = _db.Tasks.FirstOrDefault(t => t.Id == task.Id);
+            data.Title = task.Title;
+            data.Describe = task.Describe;
+
+            _db.SaveChanges();
         }
 
-        public int Delete(int id) {
-            return 200;
-        }
+        public void Delete(int id) {
+            var task = _db.Tasks.FirstOrDefault(t => t.Id == id);
 
+            _db.Tasks.Remove(task);
+            _db.SaveChanges();
+        }
     }
 }

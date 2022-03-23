@@ -50,5 +50,19 @@ namespace Tasks.Controllers
 
             return RedirectToAction("Index");
         }
+     
+        public IActionResult Update(TaskModel task)
+        {
+            _tasksService.Update(task);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _tasksService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }
