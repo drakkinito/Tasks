@@ -9,6 +9,7 @@
     </asp:ContentPlaceHolder>
     <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/bootstrap/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -64,6 +65,11 @@
     @{await Html.RenderPartialAsync("_AddTaskMW");}
 
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sortable").sortable();
+            $("#sortable").disableSelection();
+        });
+
         function clearMW() {
             document.getElementById("floatingInput").value = ""
             document.getElementById("floatingTextarea2").value = ""
