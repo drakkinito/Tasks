@@ -17,10 +17,9 @@ namespace Tasks.Services
         {
             IQueryable<TaskModel> data = _db.Set<TaskModel>();
 
-            var items = data.Where(t =>
+            return data.Where(t =>
                             (t.Title.Contains(filter.Search ?? "") || t.Describe.Contains(filter.Search ?? "")) &&
-                            (filter.StateOptions != null ? filter.StateOptions.Contains(t.StateId) : t.StateId > 0)).ToList();
-            return items;
+                            (filter.StateId == 0 ? t.StateId > 0 : t.StateId == filter.StateId)).ToList();
         }
 
         public TaskModel Get(int id)

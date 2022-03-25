@@ -12,45 +12,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container bg-dark">
-            <div class="d-flex flex-wrap align-items-center justify-content-around">
-                <a href="/" class="d-flex align-items-center col-lg-4 mb-1 mb-lg-0 mt-1 mt-lg-0">
-                    <img class="bi me-2" width="63" height="64" src="~/img/tasks.png" />
-                </a>
-                <form class="col-12 col-lg-4 mb-3 mb-lg-0">
-                    <input type="search" name="Search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" value="@ViewBag.Search">
-                </form>
-                <div class="text-end mb-3 mb-lg-0">
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
-                </div>
+    <header class="container-fluid mb-3 bg-dark text-white">
+        <div class="d-flex flex-wrap justify-content-around">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img class="bi me-2" width="63" height="64" src="~/img/tasks.png" />
+            </a>
+
+            <form class="col-12 col-lg-4 mb-3 mb-lg-0">
+                <input type="search" name="Search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" value="@ViewBag.Search">
+            </form>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2">Login</button>
+                <button type="button" class="btn btn-warning">Sign-up</button>
             </div>
         </div>
     </header>
-    <main class="container mb-sm-5">
-        <div class="row mt-3">
-            <div class="col-sm-3 p-2">
-                <ul class="nav flex-column nav-pills nav-tabs">
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary @ViewData["IndexActive"]">Tasks</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary @(@ViewData["CalendarActive"])">Calendar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="History" class="nav-link link-secondary @(@ViewData["HistoryActive"])">History</a>
-                    </li>
-                </ul>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-outline-primary mt-3" onclick="clearMW()" data-bs-toggle="modal" data-bs-target="#ModalTask">
-                        New task
-                    </button>
-                </div>
+    <div class="container-fluid pb-3">
+        <div class="d-grid gap-3" style="grid-template-columns: 1fr 3fr;">
+            <div class="bg-light border rounded-3">
+                <br><br><br><br><br><br><br><br><br><br>
             </div>
+            <div class="bg-light border rounded-3">
+                <br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8 col-8</div>
+            <div class="col-4">col-4</div>
             @RenderBody()
         </div>
-    </main>
+    </div>
+
+    @*<main class="container mb-sm-5">
+            <div class="row mt-3">
+                <div class="col-sm-3 p-2">
+                    <ul class="nav flex-column nav-pills nav-tabs">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary @ViewData["IndexActive"]">Tasks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary @(@ViewData["CalendarActive"])">Calendar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="History" class="nav-link link-secondary @(@ViewData["HistoryActive"])">History</a>
+                        </li>
+                    </ul>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-outline-primary mt-3" onclick="clearMW()" data-bs-toggle="modal" data-bs-target="#ModalTask">
+                            New task
+                        </button>
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
+        </main>*@
     <footer class="text-white fixed-bottom m-0">
         <div class="container bg-dark d-flex justify-content-around pt-3">
             <p>© @await Component.InvokeAsync("Year") Company, Tasks. All rights reserved.</p>

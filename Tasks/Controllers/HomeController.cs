@@ -2,6 +2,7 @@
 using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Tasks.Controllers
 {
@@ -16,15 +17,15 @@ namespace Tasks.Controllers
         {
             IEnumerable<TaskModel> taskItems = _tasksService.GetTasks(filter);
             ViewBag.Search = filter.Search;
-            ViewBag.StateOptions = filter.StateOptions;
+            ViewBag.StateId = filter.StateId;
 
             var response = new TaskList
             {
                 Items = taskItems,
-                States = new Dictionary<string, string>() {
-                    { "1", "To do" },
-                    { "2", "In Progress" },
-                    { "3", "Done" }
+                States = new Dictionary<int, string>() {
+                    { 1, "To do" },
+                    { 2, "In Progress" },
+                    { 3, "Done" }
                 }
             };
 

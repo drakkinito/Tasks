@@ -8,6 +8,6 @@ namespace Tasks.Models
     public class FilterVM
     {
         public string Search { get; set; }
-        public int[] StateOptions { get; set; }
+        public int StateId { get; set; }
     }
 }
