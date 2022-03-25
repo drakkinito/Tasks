@@ -13,16 +13,14 @@ namespace Tasks.Services
             _db = context;
         }
 
-        public IEnumerable<TaskModel> GetTasks(string search)
+        public IEnumerable<TaskModel> GetTasks(FilterVM filter)
         {
             IQueryable<TaskModel> data = _db.Set<TaskModel>();
 
-            if (!string.IsNullOrEmpty(search))
-            {
-                return data.Where(t => t.Title.Contains(search) || t.Describe.Contains(search)).ToList();
-            }
-
-            return data.ToList();
+            var items = data.Where(t =>
+                            (t.Title.Contains(filter.Search ?? "") || t.Describe.Contains(filter.Search ?? "")) &&
+                            (filter.StateOptions != null ? filter.StateOptions.Contains(t.StateId) : t.StateId > 0)).ToList();
+            return items;
         }
 
         public TaskModel Get(int id)
@@ -39,6 +37,7 @@ namespace Tasks.Services
             var data = _db.Tasks.FirstOrDefault(t => t.Id == task.Id);
             data.Title = task.Title;
             data.Describe = task.Describe;
+            data.StateId = task.StateId;
 
             _db.SaveChanges();
         }

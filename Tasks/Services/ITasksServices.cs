@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using TaskModel = Tasks.Models.TaskModel;
+using Tasks.Models;
 
 namespace Tasks.Services
 {
     public interface ITasksServices
     {
-        public IEnumerable<TaskModel> GetTasks(string search);
+        public IEnumerable<TaskModel> GetTasks(FilterVM filter);
         public TaskModel Get(int id);
         public void Update(TaskModel task);
         public void Add(TaskModel task);

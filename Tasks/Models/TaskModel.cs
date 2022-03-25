@@ -4,5 +4,6 @@
     {
         public string Title { get; set; }
         public string Describe { get; set; }
+        public int StateId { get; set; }
     }
 }

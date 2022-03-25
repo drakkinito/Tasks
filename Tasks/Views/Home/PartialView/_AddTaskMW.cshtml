@@ -4,6 +4,11 @@
             <form id="form" asp-antiforgery="true"  asp-controller="Home" asp-action="Create" method="post">
                 <div class="modal-header">
                     <h5 class="card-title">New task</h5>
+                    <select name="stateid" class="form-select" >
+                        <option value="1">To do</option>
+                        <option value="2">In Progress</option>
+                        <option value="3">Done</option>
+                    </select>
                     <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">

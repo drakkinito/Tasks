@@ -2,8 +2,6 @@
 using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Tasks.Controllers
 {
@@ -14,12 +12,23 @@ namespace Tasks.Controllers
         {
             _tasksService = tasksService;
         }
-        public IActionResult Index(string search)
+        public IActionResult Index(FilterVM filter)
         {
-            IEnumerable<TaskModel> list = _tasksService.GetTasks(search).ToList();
-            ViewBag.Search = search;
+            IEnumerable<TaskModel> taskItems = _tasksService.GetTasks(filter);
+            ViewBag.Search = filter.Search;
+            ViewBag.StateOptions = filter.StateOptions;
 
-            return View(list);
+            var response = new TaskList
+            {
+                Items = taskItems,
+                States = new Dictionary<string, string>() {
+                    { "1", "To do" },
+                    { "2", "In Progress" },
+                    { "3", "Done" }
+                }
+            };
+
+            return View(response);
         }
 
         public IActionResult Calendar()
