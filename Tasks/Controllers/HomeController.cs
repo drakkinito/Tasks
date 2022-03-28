@@ -9,24 +9,28 @@ namespace Tasks.Controllers
     public class HomeController : Controller
     {
         private readonly ITasksServices _tasksService;
+        private new Dictionary<int, string> _states;
+
         public HomeController(ITasksServices tasksService)
         {
             _tasksService = tasksService;
+            _states = new Dictionary<int, string>() {
+                    { 1, "To do" },
+                    { 2, "In Progress" },
+                    { 3, "Done" }
+                };
         }
         public IActionResult Index(FilterVM filter)
         {
             IEnumerable<TaskModel> taskItems = _tasksService.GetTasks(filter);
             ViewBag.Search = filter.Search;
+            ViewBag.StateName = filter.StateId > 0 ? _states[filter.StateId] : "All";
             ViewBag.StateId = filter.StateId;
 
             var response = new TaskList
             {
                 Items = taskItems,
-                States = new Dictionary<int, string>() {
-                    { 1, "To do" },
-                    { 2, "In Progress" },
-                    { 3, "Done" }
-                }
+                States = _states
             };
 
             return View(response);

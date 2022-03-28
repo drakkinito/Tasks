@@ -5,47 +5,28 @@
     ViewData["IndexActive"] = "active";
 }
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-8">col-8</div>
-        <div class="col-4">col-4</div>
+<div>
+    <h2 class="pb-2 border-bottom">List</h2>
+
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+            @ViewBag.StateName
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item @(@ViewBag.StateName == "All" ? "active" : "")" asp-action="Index">All</a></li>
+            @foreach (var state in Model.States)
+            {
+                <li><a class="dropdown-item @(ViewBag.StateId == state.Key ? "active" : "")" asp-action="Index" asp-route-stateId="@(state.Key)">@state.Value</a></li>
+            }
+        </ul>
     </div>
 </div>
-
-
-@*<div class="page-content page-container w-75" id="page-content">
+<div class="page-content page-container" id="page-content">
     <div class="row d-flex mt-2 justify-content-center">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header row">
-                    <div class="col-8">
-                        <h5>Tasks</h5>
-                    </div>
-                    <div class="col-4">
-                        <form class="form-group">
-                            <div class="input-group mb-3">
-                                <select class="form-select" id="inputGroupSelect02" name="stateId">
-                                    <option>All</option>
-                                    @foreach (var state in Model.States)
-                                    {
-                                        @if (ViewBag.StateId == state.Key)
-                                        {
-                                            <option value="@state.Key" selected>@state.Value</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@state.Key">@state.Value</option>
-                                        }
-                                    }
-                                </select>
-                                <input type="submit" class="btn input-group-text" for="inputGroupSelect02">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="card-block">
+        <div class="col-sm-12 p-0">
+            <div class="card border-0">
+                <div class="card-block p-0">
                     <div class="row col-sm-8 w-100 m-0" id="sortable">
                         @foreach (var task in Model.Items)
                         {
@@ -76,4 +57,4 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>

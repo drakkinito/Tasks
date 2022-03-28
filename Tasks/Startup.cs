@@ -21,7 +21,7 @@ namespace Tasks
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("Default");
- 
+
             services.AddDbContext<TaskDbContext>(options =>
                 options.UseSqlServer(connection));
 
