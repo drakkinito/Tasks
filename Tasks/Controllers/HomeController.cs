@@ -2,6 +2,7 @@
 using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
+using Tasks.Models.Auth;
 
 namespace Tasks.Controllers
 {
