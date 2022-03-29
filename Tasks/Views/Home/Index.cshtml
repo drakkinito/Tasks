@@ -5,19 +5,17 @@
     ViewData["IndexActive"] = "active";
 }
 
-
 <div>
     <h2 class="pb-2 border-bottom">List</h2>
 
     <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-            @ViewBag.StateName
+            @Model.Filter.StateName
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item @(@ViewBag.StateName == "All" ? "active" : "")" asp-action="Index">All</a></li>
             @foreach (var state in Model.States)
             {
-                <li><a class="dropdown-item @(ViewBag.StateId == state.Key ? "active" : "")" asp-action="Index" asp-route-stateId="@(state.Key)">@state.Value</a></li>
+                <li><a class="dropdown-item @(Model.Filter.StateId == state.Key ? "active" : "")" asp-action="Index" asp-route-stateId="@(state.Key)">@state.Value</a></li>
             }
         </ul>
     </div>
@@ -32,7 +30,7 @@
                         {
                             <div class="col-sm-3 pt-3">
                                 <div class="card">
-                                    <span>@Model.States[task.StateId]</span>
+                                    <span class="p-2">@Model.States[task.StateId]</span>
                                     <div class="btn-group w-50 position-absolute top-0 end-0" role="group" aria-label="Basic mixed styles example">
                                         <a asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id" class="btn btn-outline-light">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" color="#ff000078" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -46,7 +44,7 @@
                                         </button>
                                     </div>
                                     <div class="card-body cut-text">
-                                        <h5 id="t-@task.Id" class="card-title mTitlet-3 mt-4">@task.Title</h5>
+                                        <h5 id="t-@task.Id" class="card-title mTitlet-3">@task.Title</h5>
                                         <p id="d-@task.Id" class="card-text">@task.Describe</p>
                                     </div>
                                 </div>

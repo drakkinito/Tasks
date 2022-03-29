@@ -15,11 +15,12 @@ namespace Tasks.Services
 
         public IEnumerable<TaskModel> GetTasks(FilterVM filter)
         {
+            
             IQueryable<TaskModel> data = _db.Set<TaskModel>();
 
             return data.Where(t =>
-                            (t.Title.Contains(filter.Search ?? "") || t.Describe.Contains(filter.Search ?? "")) &&
-                            (filter.StateId == 0 ? t.StateId > 0 : t.StateId == filter.StateId)).ToList();
+                             (t.Title.Contains(filter.Search ?? "") || t.Describe.Contains(filter.Search ?? "")) &&
+                             (filter.StateId == 0 ? t.StateId > 0 : t.StateId == filter.StateId)).ToList();
         }
 
         public TaskModel Get(int id)

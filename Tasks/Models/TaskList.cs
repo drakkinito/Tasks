@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Tasks.Models
 {
@@ -7,5 +6,6 @@ namespace Tasks.Models
     {
         public IEnumerable<TaskModel> Items { get; set; }
         public Dictionary<int, string> States { get; set; }
+        public FilterVM Filter { get; set; }
     }
 }

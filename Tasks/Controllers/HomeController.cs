@@ -2,7 +2,6 @@
 using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Tasks.Controllers
 {
@@ -15,22 +14,25 @@ namespace Tasks.Controllers
         {
             _tasksService = tasksService;
             _states = new Dictionary<int, string>() {
-                    { 1, "To do" },
-                    { 2, "In Progress" },
-                    { 3, "Done" }
+                    { 1, "All" },
+                    { 2, "To do" },
+                    { 3, "In Progress" },
+                    { 4, "Done" }
                 };
         }
         public IActionResult Index(FilterVM filter)
         {
             IEnumerable<TaskModel> taskItems = _tasksService.GetTasks(filter);
+
+
             ViewBag.Search = filter.Search;
-            ViewBag.StateName = filter.StateId > 0 ? _states[filter.StateId] : "All";
-            ViewBag.StateId = filter.StateId;
+            filter.StateName = filter.StateId > 0 ? _states[filter.StateId] : "All";
 
             var response = new TaskList
             {
                 Items = taskItems,
-                States = _states
+                States = _states,
+                Filter = filter
             };
 
             return View(response);

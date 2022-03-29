@@ -42,7 +42,7 @@
                 </a>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                    <input type="search" name="Search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" value="@ViewBag.Search">
                 </form>
 
 
@@ -90,30 +90,6 @@
             </div>
         </div>
     </div>
-
-    @*<main class="container mb-sm-5">
-            <div class="row mt-3">
-                <div class="col-sm-3 p-2">
-                    <ul class="nav flex-column nav-pills nav-tabs">
-                        <li class="nav-item">
-                            <a asp-controller="Home" asp-action="Index" class="nav-link link-secondary @ViewData["IndexActive"]">Tasks</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Home" asp-action="Calendar" class="nav-link link-secondary @(@ViewData["CalendarActive"])">Calendar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a asp-controller="Home" asp-action="History" class="nav-link link-secondary @(@ViewData["HistoryActive"])">History</a>
-                        </li>
-                    </ul>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-outline-primary mt-3" onclick="clearMW()" data-bs-toggle="modal" data-bs-target="#ModalTask">
-                            New task
-                        </button>
-                    </div>
-                </div>
-                @RenderBody()
-            </div>
-        </main>*@
     <footer class="text-white fixed-bottom m-0">
         <div class="container bg-dark d-flex justify-content-around pt-3">
             <p>© @await Component.InvokeAsync("Year") Company, Tasks. All rights reserved.</p>
@@ -136,16 +112,19 @@
         function clearMW() {
             document.getElementById("floatingInput").value = ""
             document.getElementById("floatingTextarea2").value = ""
+
+            document.getElementById("add").value = "Add"
         }
         function setValueMW(id) {
-            var formAction = document.getElementById("form");
-            var t = document.getElementById("t-" + id);
-            var d = document.getElementById("d-" + id);
+            var formModal = document.getElementById("form");
+            var titleValue = document.getElementById("t-" + id);
+            var describeValue = document.getElementById("d-" + id);
 
-            formAction.setAttribute("action", "Home/Update/" + id);
+            formModal.setAttribute("action", "Home/Update/" + id);
 
-            document.getElementById("floatingInput").value = t.innerHTML;
-            document.getElementById("floatingTextarea2").value = d.innerHTML;
+            document.getElementById("add").value = "Save"
+            document.getElementById("floatingInput").value = titleValue.innerHTML;
+            document.getElementById("floatingTextarea2").value = describeValue.innerHTML;
         }
     </script>
 </body>
