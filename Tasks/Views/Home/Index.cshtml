@@ -1,8 +1,12 @@
 ﻿@model TaskList;
+@using Tasks.HtmlHelper
+
 
 @{
     ViewData["Title"] = "Index";
     ViewData["IndexActive"] = "active";
+
+    int i = 0;
 }
 
 <div>
@@ -15,7 +19,7 @@
         <ul class="dropdown-menu">
             @foreach (var state in Model.States)
             {
-                <li><a class="dropdown-item @(Model.Filter.StateId == state.Key ? "active" : "")" asp-action="Index" asp-route-stateId="@(state.Key)">@state.Value</a></li>
+                <li><a class="dropdown-item @(Model.Filter.StateOrder == state.Key ? "active" : "")" asp-action="Index" asp-route-stateOrder="@(state.Key)">@state.Value</a></li>
             }
         </ul>
     </div>
@@ -26,6 +30,8 @@
             <div class="card border-0">
                 <div class="card-block p-0">
                     <div class="row col-sm-8 w-100 m-0" id="sortable">
+                        @*@Html.CreateTaskList(Model.Items, Model.States)*@
+
                         @foreach (var task in Model.Items)
                         {
                             <div class="col-sm-3 pt-3">

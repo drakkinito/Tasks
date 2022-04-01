@@ -3,6 +3,7 @@ using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
 using Tasks.Models.Auth;
+using System.Linq;
 
 namespace Tasks.Controllers
 {
@@ -15,19 +16,20 @@ namespace Tasks.Controllers
         {
             _tasksService = tasksService;
             _states = new Dictionary<int, string>() {
-                    { 1, "All" },
-                    { 2, "To do" },
-                    { 3, "In Progress" },
-                    { 4, "Done" }
+                    { 0, "All" },
+                    { 1, "To do" },
+                    { 2, "In Progress" },
+                    { 3, "Done" }
                 };
         }
         public IActionResult Index(FilterVM filter)
         {
-            IEnumerable<TaskModel> taskItems = _tasksService.GetTasks(filter);
+          List<TaskModel> taskItems = _tasksService.GetTasks(filter);
 
-
+           
             ViewBag.Search = filter.Search;
-            filter.StateName = filter.StateId > 0 ? _states[filter.StateId] : "All";
+            ViewBag.IsAuth = false;
+            filter.StateName = _states[filter.StateOrder];
 
             var response = new TaskList
             {

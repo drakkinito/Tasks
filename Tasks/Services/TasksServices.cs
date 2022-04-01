@@ -13,14 +13,28 @@ namespace Tasks.Services
             _db = context;
         }
 
-        public IEnumerable<TaskModel> GetTasks(FilterVM filter)
+        public List<TaskModel> GetTasks(FilterVM filter)
         {
             
             IQueryable<TaskModel> data = _db.Set<TaskModel>();
 
-            return data.Where(t =>
-                             (t.Title.Contains(filter.Search ?? "") || t.Describe.Contains(filter.Search ?? "")) &&
-                             (filter.StateId == 0 ? t.StateId > 0 : t.StateId == filter.StateId)).ToList();
+            if (!string.IsNullOrEmpty(filter.Search)) {
+                data = data.Where(t => t.Title.Contains(filter.Search) || t.Describe.Contains(filter.Search));
+            }
+            if (filter.StateOrder > 0) {
+                data = data.Where(t => t.StateId == filter.StateOrder);
+            }
+
+            var items = data.OrderBy(t => t.StateId).ToList();
+
+            var filterItems = new Dictionary<int, List<TaskModel>>
+            {
+                { 1, items.Where(t => t.StateId == 1).ToList()},
+                { 2, items.Where(t => t.StateId == 2).ToList()},
+                { 3, items.Where(t => t.StateId == 3).ToList()}
+            };
+
+            return items;
         }
 
         public TaskModel Get(int id)

@@ -9,16 +9,17 @@
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.css">
 </head>
 <body class="text-center">
-    <main class="form-signin">
-        <form>
-            <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <main class="d-flex justify-content-center form-signin" style="margin-top:200px">
+        <form class="col-2" style="min-width: 300px;">
+            <a href="/" class="mb-2 mb-lg-0">
+                <img class="bi me-2" width="63" height="64" src="~/img/tasks.png" />
+            </a>
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-            <div class="form-floating">
+            <div class="mb-3 form-floating">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
-            <div class="form-floating">
+            <div class="mb-3 form-floating">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>

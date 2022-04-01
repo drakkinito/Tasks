@@ -5,7 +5,7 @@ namespace Tasks.Services
 {
     public interface ITasksServices
     {
-        public IEnumerable<TaskModel> GetTasks(FilterVM filter);
+        public List<TaskModel> GetTasks(FilterVM filter);
         public TaskModel Get(int id);
         public void Update(TaskModel task);
         public void Add(TaskModel task);
