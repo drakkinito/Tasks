@@ -10,7 +10,7 @@ namespace Tasks.Controllers
     public class HomeController : Controller
     {
         private readonly ITasksServices _tasksService;
-        private new Dictionary<int, string> _states;
+        private readonly Dictionary<int, string> _states;
 
         public HomeController(ITasksServices tasksService)
         {
@@ -55,6 +55,9 @@ namespace Tasks.Controllers
         public IActionResult Get(int id)
         {
             TaskModel task = _tasksService.Get(id);
+            if (task == null) {
+                return BadRequest();
+            }
 
             return View(task);
         }
@@ -62,6 +65,10 @@ namespace Tasks.Controllers
         [HttpPost]
         public IActionResult Create(TaskModel task)
         {
+            if (task == null) {
+                return BadRequest();
+            }
+
             if (!string.IsNullOrEmpty(task.Title) || !string.IsNullOrEmpty(task.Describe))
             {
                 _tasksService.Add(task);
@@ -72,14 +79,31 @@ namespace Tasks.Controllers
      
         public IActionResult Update(TaskModel task)
         {
-            _tasksService.Update(task);
+            if (task == null)
+            {
+                return BadRequest();
+            }
+
+            if (!_tasksService.Update(task)) {
+                return BadRequest();
+            }
+
+            return RedirectToAction("Index");
+        } 
+        public IActionResult UpdateState(int id, int stateId)
+        {
+            if (!_tasksService.UpdateState(id, stateId)) {
+                return BadRequest();
+            }
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            _tasksService.Delete(id);
+            if (!_tasksService.Delete(id)) { 
+                return BadRequest();
+            }
 
             return RedirectToAction("Index");
         }

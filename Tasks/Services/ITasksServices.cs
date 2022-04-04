@@ -7,8 +7,9 @@ namespace Tasks.Services
     {
         public List<TaskModel> GetTasks(FilterVM filter);
         public TaskModel Get(int id);
-        public void Update(TaskModel task);
+        public bool Update(TaskModel task);
+        public bool UpdateState(int id, int stateId);
         public void Add(TaskModel task);
-        public void Delete(int id);
+        public bool Delete(int id);
     }
 }

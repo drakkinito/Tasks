@@ -47,20 +47,43 @@ namespace Tasks.Services
             _db.SaveChanges();
         }
 
-        public void Update(TaskModel task) {
+        public bool Update(TaskModel task) {
             var data = _db.Tasks.FirstOrDefault(t => t.Id == task.Id);
+            if (data == null) {
+                return false;
+            }
+
             data.Title = task.Title;
             data.Describe = task.Describe;
             data.StateId = task.StateId;
-
             _db.SaveChanges();
+
+            return true;
+        }
+        public bool UpdateState(int id, int stateId)
+        {
+            var data = _db.Tasks.FirstOrDefault(t => t.Id == id);
+            if (data == null) {
+                return false;
+            }
+
+            data.StateId = stateId;
+            _db.SaveChanges();
+
+            return true;
         }
 
-        public void Delete(int id) {
+        public bool Delete(int id) {
             var task = _db.Tasks.FirstOrDefault(t => t.Id == id);
+
+            if (task == null) {
+                return false;
+            }
 
             _db.Tasks.Remove(task);
             _db.SaveChanges();
+
+            return true;
         }
     }
 }

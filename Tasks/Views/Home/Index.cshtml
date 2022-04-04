@@ -5,12 +5,6 @@
 @{
     ViewData["Title"] = "Index";
     ViewData["IndexActive"] = "active";
-
-    //int sectionState = Model.Items.FirstOrDefault().StateId;
-    int sectionState = 1;
-    var exept = Model.Items.Select(t => t.StateId).ToHashSet();
-    var exept1 = Model.States.Keys.Except(exept).Skip(1);
-
 }
 
 <div>
@@ -42,7 +36,17 @@
                                 {
                                     <div class="col-sm-3 pt-1">
                                         <div class="card">
-                                            @Html.StateName(Model.States[task.StateId], "p-2")
+                                            <div class="dropdown p-1">
+                                                <a class="btn btn-outline-light border" style="color: black; padding: 0px 8px 0px 8px;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    @Model.States[task.StateId]
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    @foreach (var state in Model.States.Skip(1))
+                                                    {
+                                                        <li>@Html.ActionLink(@state.Value, "UpdateState", new TaskModel() { Id = task.Id, Describe = task.Describe, StateId = state.Key, Title = task.Title }, new { @class = "dropdown-item" })</li>
+                                                    }
+                                                </ul>
+                                            </div>
                                             <div class="btn-group w-50 position-absolute top-0 end-0" role="group" aria-label="Basic mixed styles example">
                                                 <a asp-controller="Home" asp-action="Delete" asp-route-id="@task.Id" class="btn btn-outline-light">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" color="#ff000078" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
