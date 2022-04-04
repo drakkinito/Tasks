@@ -41,16 +41,6 @@ namespace Tasks.Controllers
             return View(response);
         }
 
-        public IActionResult Calendar()
-        {
-            return View();
-        }
-
-        public IActionResult History()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Get(int id)
         {
@@ -89,7 +79,8 @@ namespace Tasks.Controllers
             }
 
             return RedirectToAction("Index");
-        } 
+        }
+
         public IActionResult UpdateState(int id, int stateId)
         {
             if (!_tasksService.UpdateState(id, stateId)) {
@@ -106,6 +97,16 @@ namespace Tasks.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Calendar()
+        {
+            return View();
+        }
+
+        public IActionResult History()
+        {
+            return View();
         }
     }
 }
