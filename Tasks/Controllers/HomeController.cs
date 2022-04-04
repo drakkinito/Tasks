@@ -26,7 +26,6 @@ namespace Tasks.Controllers
         {
           List<TaskModel> taskItems = _tasksService.GetTasks(filter);
 
-           
             ViewBag.Search = filter.Search;
             ViewBag.IsAuth = false;
             filter.StateName = _states[filter.StateOrder];
