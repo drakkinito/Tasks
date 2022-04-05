@@ -91,11 +91,6 @@
     @{await Html.RenderPartialAsync("PartialView/_AddTaskMW");}
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#sortable").sortable();
-            $("#sortable").disableSelection();
-        });
-
         function clearMW() {
             document.getElementById("floatingInput").value = ""
             document.getElementById("floatingTextarea2").value = ""
