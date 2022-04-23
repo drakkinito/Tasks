@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tasks.Context;
 using Tasks.Models;
@@ -13,9 +14,8 @@ namespace Tasks.Services
             _db = context;
         }
 
-        public List<TaskModel> GetTasks(FilterVM filter)
+        public TaskList GetTasks(FilterVM filter)
         {
-            
             IQueryable<TaskModel> data = _db.Set<TaskModel>();
 
             if (!string.IsNullOrEmpty(filter.Search)) {
@@ -25,13 +25,10 @@ namespace Tasks.Services
                 data = data.Where(t => t.StateId == filter.StateOrder);
             }
 
-            var items = data.OrderBy(t => t.StateId).ToList();
-
-            var filterItems = new Dictionary<int, List<TaskModel>>
+            var items = new TaskList()
             {
-                { 1, items.Where(t => t.StateId == 1).ToList()},
-                { 2, items.Where(t => t.StateId == 2).ToList()},
-                { 3, items.Where(t => t.StateId == 3).ToList()}
+                Items = data.Where(t => t.StartDate == DateTime.Now.Date).OrderBy(t => t.StateId).ToList(),
+                ExpiredTaskItems = data.Where(t => t.StartDate < DateTime.Now.Date && t.StateId != 3).ToList()
             };
 
             return items;
@@ -56,6 +53,7 @@ namespace Tasks.Services
             data.Title = task.Title;
             data.Describe = task.Describe;
             data.StateId = task.StateId;
+            data.StartDate = task.StartDate;
             _db.SaveChanges();
 
             return true;

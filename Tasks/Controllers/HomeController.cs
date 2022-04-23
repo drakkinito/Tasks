@@ -4,6 +4,7 @@ using Tasks.Models;
 using System.Collections.Generic;
 using Tasks.Models.Auth;
 using System.Linq;
+using System;
 
 namespace Tasks.Controllers
 {
@@ -19,32 +20,30 @@ namespace Tasks.Controllers
                     { 0, "All" },
                     { 1, "To do" },
                     { 2, "In Progress" },
-                    { 3, "Done" }
+                    { 3, "Done" },
+                    { 4, "Expired task"}
                 };
         }
         public IActionResult Index(FilterVM filter)
         {
-          List<TaskModel> taskItems = _tasksService.GetTasks(filter);
+            TaskList taskItems = _tasksService.GetTasks(filter);
 
             ViewBag.Search = filter.Search;
             ViewBag.IsAuth = false;
             filter.StateName = _states[filter.StateOrder];
+            
+            taskItems.Filter = filter;
+            taskItems.States = _states;
 
-            var response = new TaskList
-            {
-                Items = taskItems,
-                States = _states,
-                Filter = filter
-            };
-
-            return View(response);
+            return View(taskItems);
         }
 
         [HttpGet]
         public IActionResult Get(int id)
         {
             TaskModel task = _tasksService.Get(id);
-            if (task == null) {
+            if (task == null)
+            {
                 return BadRequest();
             }
 
@@ -54,7 +53,8 @@ namespace Tasks.Controllers
         [HttpPost]
         public IActionResult Create(TaskModel task)
         {
-            if (task == null) {
+            if (task == null)
+            {
                 return BadRequest();
             }
 
@@ -65,7 +65,7 @@ namespace Tasks.Controllers
 
             return RedirectToAction("Index");
         }
-     
+
         public IActionResult Update(TaskModel task)
         {
             if (task == null)
@@ -73,7 +73,8 @@ namespace Tasks.Controllers
                 return BadRequest();
             }
 
-            if (!_tasksService.Update(task)) {
+            if (!_tasksService.Update(task))
+            {
                 return BadRequest();
             }
 
@@ -82,7 +83,8 @@ namespace Tasks.Controllers
 
         public IActionResult UpdateState(int id, int stateId)
         {
-            if (!_tasksService.UpdateState(id, stateId)) {
+            if (!_tasksService.UpdateState(id, stateId))
+            {
                 return BadRequest();
             }
 
@@ -91,7 +93,8 @@ namespace Tasks.Controllers
 
         public IActionResult Delete(int id)
         {
-            if (!_tasksService.Delete(id)) { 
+            if (!_tasksService.Delete(id))
+            {
                 return BadRequest();
             }
 
