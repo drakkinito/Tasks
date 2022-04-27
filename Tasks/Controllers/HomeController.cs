@@ -2,7 +2,6 @@
 using Tasks.Services;
 using Tasks.Models;
 using System.Collections.Generic;
-using Tasks.Models.Auth;
 using System.Linq;
 using System;
 
@@ -24,17 +23,23 @@ namespace Tasks.Controllers
                     { 4, "Expired task"}
                 };
         }
+
         public IActionResult Index(FilterVM filter)
         {
-            TaskList taskItems = _tasksService.GetTasks(filter);
+            ICollection<TaskModel> taskItems = _tasksService.GetTasks(filter);
+
+            var response = new TaskList()
+            {
+                Filter = filter,
+                States = _states,
+                Items = taskItems.Where(t => t.StartDate == DateTime.Now.Date).OrderBy(t => t.StateId).ToList(),
+                ExpiredTaskItems = taskItems.Where(t => t.StartDate < DateTime.Now.Date && t.StateId != 3).ToList()
+            };
 
             ViewBag.Search = filter.Search;
             ViewBag.IsAuth = false;
-            filter.StateName = _states[filter.StateOrder];
+            //filter.StateName = _states[filter.StateOrder];
             
-            taskItems.Filter = filter;
-            taskItems.States = _states;
-
             return View(taskItems);
         }
 

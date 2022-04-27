@@ -5,7 +5,7 @@ namespace Tasks.Services
 {
     public interface ITasksServices
     {
-        public TaskList GetTasks(FilterVM filter);
+        public ICollection<TaskModel> GetTasks(FilterVM filter);
         public TaskModel Get(int id);
         public bool Update(TaskModel task);
         public bool UpdateState(int id, int stateId);
